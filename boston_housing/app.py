@@ -14,7 +14,7 @@ def index():
         zone = float(request.form.get('zone')) / 25000
         room = float(request.form.get('rooms'))
         distance = float(request.form.get('distance'))
-        prediction = predict_model.predict(np.array([[zone,room,distance]]))[0]
+        prediction = predict_model.predict(np.array([[zone,room,distance]]))[0] * 1000
         return redirect(url_for('predict', result=prediction))
 
 @app.route('/result/<result>')
@@ -23,4 +23,4 @@ def predict(result):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=5001,debug=True)
